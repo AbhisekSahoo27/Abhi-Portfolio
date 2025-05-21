@@ -1,0 +1,1354 @@
+/* Basic Resets & Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Underdog", cursive;
+  background-color: black;
+  color: white;
+  overflow-x: hidden; /* Prevent horizontal scroll from parallax */
+}
+
+/* Home Section - Landing Page */
+.home-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /* Crucial to contain absolute positioned elements and parallax */
+  background-color: black;
+}
+
+/* Background Image 1 (bg1.jpeg) */
+.bg-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures it covers the area */
+  transform: scale(1.1); /* Initially 110% large */
+  will-change: transform; /* Hint for browser optimization */
+}
+
+/* Background Image 2 (bg2.png) */
+
+.bg-2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Keeps it horizontally centered */
+  height: auto; /* Ensures aspect ratio is maintained */
+  opacity: 0.9;
+  z-index: 10;
+  will-change: transform; /* Hint for browser optimization */
+
+  /* --- Default styles for smaller screens (e.g., mobile) --- */
+  top: -15%; /* Adjusted for a higher starting point on mobile */
+  width: 90vw; /* Take more width on smaller screens */
+  max-width: 500px; /* Prevent it from becoming too large on very small screens, or when vw is huge */
+
+  /* --- Media Queries for responsiveness --- */
+
+  /* Small tablets / Landscape phones (e.g., 600px and up) */
+  @media (min-width: 600px) {
+    top: -10%;
+    width: 80vw;
+    max-width: 650px;
+  }
+
+  /* Tablets (e.g., 768px and up) */
+  @media (min-width: 768px) {
+    top: -25%; /* Bring it up a bit more on tablets */
+    width: 70vw;
+    max-width: 800px; /* Allow it to be larger */
+  }
+
+  /* Laptops / Desktops (e.g., 1024px and up) */
+  @media (min-width: 1024px) {
+    top: -50%; /* Closer to the top for larger screens */
+    width: 60vw;
+    max-width: 950px; /* Ideal max width for typical laptops */
+  }
+
+  /* Larger Desktops (e.g., 1200px and up) */
+  @media (min-width: 1200px) {
+    top: -10%;
+    width: 50vw;
+    max-width: 1100px; /* For very large displays */
+  }
+
+  /* Extra Large Desktops (e.g., 1440px and up) */
+  @media (min-width: 1440px) {
+    top: -30%;
+    width: 40vw;
+    max-width: 1200px; /* Keep it from becoming overwhelmingly large */
+  }
+}
+
+/* Navbar */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999; /* Ensure navbar is on top of everything */
+  width: 100%;
+  padding: 1rem 1.5rem; /* 16px 24px */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    padding: 2.5rem; /* 40px */
+  }
+}
+
+.navbar .logo {
+  display: flex;
+  gap: 1rem; /* 16px */
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .navbar .logo {
+    gap: 1.75rem; /* 28px */
+  }
+}
+
+.navbar .logo .lines {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+@media (min-width: 768px) {
+  .navbar .logo .lines {
+    gap: 5px;
+  }
+}
+
+.navbar .logo .line {
+  width: 1.5rem; /* 24px */
+  height: 0.25rem; /* 4px */
+  background: linear-gradient(to bottom, white, gray);
+}
+
+@media (min-width: 768px) {
+  .navbar .logo .line {
+    width: 2rem; /* 32px */
+    height: 0.25rem; /* 4px */
+  }
+}
+
+.navbar .logo .line:nth-child(2) {
+  width: 1rem; /* 16px */
+}
+
+@media (min-width: 768px) {
+  .navbar .logo .line:nth-child(2) {
+    width: 1.25rem; /* 20px */
+  }
+}
+
+.navbar .logo h3 {
+  font-size: 0.875rem; /* 14px */
+  font-weight: bold;
+  background: linear-gradient(to bottom, white, gray);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .navbar .logo h3 {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+/* My Name */
+.my-name {
+  position: absolute;
+  top: 45%; /* Adjusted for better initial placement */
+  left: 15%; /* Changed from 5% to 15% to move it right */
+  font-size: 2rem; /* Slightly smaller on mobile */
+  font-weight: bold;
+  transform: rotate(-8deg); /* Initial rotation */
+  opacity: 0; /* Initially hidden for GSAP fade-in */
+  z-index: 5; /* Behind main-photo */
+  white-space: nowrap; /* Keep name on one line */
+  will-change: transform, text-shadow, opacity; /* Hint for browser optimization */
+}
+
+@media (min-width: 640px) {
+  .my-name {
+    font-size: 2.5rem;
+    left: 20%;
+  }
+}
+
+@media (min-width: 768px) {
+  .my-name {
+    top: 50%;
+    left: 25%; /* Adjust this for larger screens as well */
+    font-size: 3.5rem; /* Adjusted size for tablets */
+    transform: rotate(-10deg); /* Adjust rotation for larger screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .my-name {
+    font-size: 5rem; /* Back to larger size for laptops */
+    left: 30%;
+  }
+}
+
+.my-name .name-abhisek {
+  color: white; /* Default color */
+}
+
+.my-name .name-sahoo {
+  color: white; /* Default color */
+}
+
+/* Main Photo */
+.main-photo {
+  position: absolute;
+  width: 14rem; /* Slightly smaller on mobile */
+  height: 18rem; /* Slightly smaller on mobile */
+  object-fit: cover;
+  left: 50%;
+  top: 85%; /* Adjusted for better initial placement on mobile */
+  transform: translate(-50%, -50%) scale(0); /* Initially scaled to 0 for GSAP animation */
+  opacity: 0.2; /* Initially transparent for GSAP fade-in */
+  z-index: 10; /* Photo is on top of my-name */
+  will-change: transform, opacity;
+}
+
+@media (min-width: 640px) {
+  .main-photo {
+    width: 16rem;
+    height: 20rem;
+    top: 80%;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-photo {
+    width: 20rem;
+    height: 26rem;
+    top: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-photo {
+    width: 22.5rem; /* Back to larger size for laptops */
+    height: 30rem; /* Back to larger size for laptops */
+    top: 66%;
+  }
+}
+
+/* Bottom Bar */
+.btmbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.75rem 1rem; /* Adjusted padding for smaller screens */
+  z-index: 99;
+  background: linear-gradient(to top, black, transparent); /* Subtle fade up */
+}
+
+@media (min-width: 768px) {
+  .btmbar {
+    justify-content: space-around;
+    padding: 1.5rem 2.5rem; /* Adjust padding for larger screens */
+  }
+}
+
+.btmbar h2 {
+  /* font-size: 0.75rem; Slightly smaller on mobile */
+  font-weight: bold;
+  background: linear-gradient(to top, white, #60a5fa); /* Tailwind blue-300 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .btmbar h3 {
+    font-size: 1rem; /* Adjust font size for larger screens */
+  }
+}
+
+/* Fixed Navigation */
+.fixed-nav {
+  position: fixed;
+  bottom: 0.75rem; /* Adjusted bottom margin for smaller screens */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999; /* Ensure fixed nav is on top of everything */
+  background-color: rgba(0, 0, 0, 0.5); /* black/50 */
+  backdrop-filter: blur(8px); /* backdrop-blur-sm */
+  border-radius: 9999px; /* rounded-full */
+  padding: 0.4rem 0.8rem; /* Adjusted padding for smaller screens */
+  display: flex;
+  align-items: center;
+  gap: 0.2rem; /* Adjusted gap for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .fixed-nav {
+    bottom: 1rem;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.nav-button {
+  position: relative;
+  padding: 0.2rem 0.6rem; /* Adjusted padding for smaller screens */
+  border-radius: 9999px; /* rounded-full */
+  font-size: 0.7rem; /* Slightly smaller on mobile */
+  color: #9ca3af; /* gray-400 */
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .nav-button {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.875rem;
+  }
+}
+
+.nav-button:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.05); /* white/5 */
+}
+
+.nav-button.active {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1); /* white/10 */
+}
+
+.nav-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 0.1rem; /* Adjusted height for smaller screens */
+  background: linear-gradient(
+    to right,
+    #60a5fa,
+    #a855f7
+  ); /* blue-400 to purple-500 */
+  border-radius: 9999px; /* rounded-full */
+}
+
+/* Section Common Styles */
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem; /* Adjusted padding for smaller screens */
+  background-color: black;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: 5rem 2.5rem;
+  }
+}
+
+section h1 {
+  font-size: 2rem; /* Slightly smaller on mobile */
+  font-weight: bold;
+  margin-bottom: 1.5rem; /* Adjusted margin for smaller screens */
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  section h1 {
+    font-size: 3.75rem;
+  }
+}
+
+/* About Section */
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem; /* Adjusted gap for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .about-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.about-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.about-image-container img {
+  height: 10rem; /* Adjusted height for smaller screens */
+  object-fit: contain;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.about-image-container img:hover {
+  transform: scale(1.01);
+}
+
+@media (min-width: 768px) {
+  .about-image-container img {
+    height: 12.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-image-container img {
+    height: 21.875rem;
+  }
+}
+
+.about-blob-1,
+.about-blob-2 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.about-blob-1 {
+  width: 25rem; /* Adjusted width for smaller screens */
+  height: 25rem; /* Adjusted height for smaller screens */
+  background: linear-gradient(
+    to bottom right,
+    rgba(29, 78, 216, 0.3),
+    rgba(96, 165, 250, 0.3)
+  ); /* blue-900/30 to blue-400/30 */
+  filter: blur(70px); /* Adjusted blur for smaller screens */
+  opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+  .about-blob-1 {
+    width: 31.25rem;
+    height: 31.25rem;
+    filter: blur(100px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-blob-1 {
+    width: 43.75rem;
+    height: 43.75rem;
+  }
+}
+
+.about-blob-2 {
+  width: 15rem; /* Adjusted width for smaller screens */
+  height: 15rem; /* Adjusted height for smaller screens */
+  background: linear-gradient(
+    to bottom right,
+    rgba(6, 182, 212, 0.2),
+    rgba(29, 78, 216, 0.2)
+  ); /* cyan-500/20 to blue-900/20 */
+  filter: blur(60px); /* Adjusted blur for smaller screens */
+  opacity: 0.6;
+  animation: pulse 4s infinite ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .about-blob-2 {
+    width: 18.75rem;
+    height: 18.75rem;
+    filter: blur(80px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-blob-2 {
+    width: 31.25rem;
+    height: 31.25rem;
+  }
+}
+
+.about-content {
+  padding: 1rem 1.5rem; /* Adjusted padding for smaller screens */
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    padding: 1rem 2.5rem;
+    text-align: left;
+    margin-top: 0;
+  }
+}
+
+.about-content h1 {
+  background: linear-gradient(
+    to right,
+    #1d4ed8,
+    #93c5fd
+  ); /* blue-900 to blue-200 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.about-content p {
+  font-size: 0.9rem; /* Adjusted font size for smaller screens */
+  margin-bottom: 0.8rem; /* Adjusted margin for smaller screens */
+  color: #d1d5db; /* gray-300 */
+}
+
+.about-content p:last-child {
+  color: #9ca3af; /* gray-400 */
+}
+
+@media (min-width: 768px) {
+  .about-content p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-content p {
+    font-size: 1.25rem;
+  }
+}
+
+/* Skills Section */
+.skills-section {
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  display: flex;
+  flex-direction: column; /* Default: content on top, image below */
+  align-items: center; /* Center items horizontally in column layout */
+  justify-content: center; /* Center items vertically in column layout */
+  gap: 1.5rem; /* Increased space between content and image on smaller screens */
+  padding: 3rem 1rem; /* Adjusted padding for smaller screens */
+  background-color: black;
+  color: white;
+  text-align: center; /* Default text alignment for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .skills-section {
+    flex-direction: row; /* On screens 768px and up: content and image side-by-side */
+    gap: 2.5rem; /* Further increased gap between content and image on wider screens */
+    padding: 4rem 2rem; /* Adjusted padding for larger screens */
+    text-align: left; /* Align text to left for larger screens */
+  }
+}
+
+.skills-image-container {
+  width: 100%; /* Default to full width for small screens */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  order: 1; /* Image comes first in column layout (top) */
+}
+
+@media (min-width: 768px) {
+  .skills-image-container {
+    width: 50%; /* Takes half the width in row layout */
+    order: 2; /* Image comes second (right side) in row layout */
+  }
+}
+
+.skills-image-container img {
+  height: 9rem; /* Adjusted height for smaller screens */
+  object-fit: contain;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.skills-image-container img:hover {
+  transform: scale(1.01);
+}
+
+@media (min-width: 768px) {
+  .skills-image-container img {
+    height: 11rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .skills-image-container img {
+    height: 20rem;
+  }
+}
+
+/* Blobs for the image container - existing styles maintained */
+.skills-blob-1,
+.skills-blob-2 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.skills-blob-1 {
+  width: 25rem;
+  height: 25rem;
+  background: linear-gradient(
+    to bottom right,
+    rgba(27, 94, 32, 0.3),
+    rgba(76, 175, 80, 0.3)
+  );
+  filter: blur(70px);
+  opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+  .skills-blob-1 {
+    width: 31.25rem;
+    height: 31.25rem;
+    filter: blur(100px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .skills-blob-1 {
+    width: 43.75rem;
+    height: 43.75rem;
+  }
+}
+
+.skills-blob-2 {
+  width: 15rem;
+  height: 15rem;
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 150, 136, 0.2),
+    rgba(27, 94, 32, 0.2)
+  );
+  filter: blur(60px);
+  opacity: 0.6;
+  animation: pulse 4s infinite ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .skills-blob-2 {
+    width: 18.75rem;
+    height: 18.75rem;
+    filter: blur(80px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .skills-blob-2 {
+    width: 31.25rem;
+    height: 31.25rem;
+  }
+}
+
+.skills-content {
+  width: 100%; /* Default to full width for small screens */
+  padding: 0 1rem; /* Adjusted padding for smaller screens */
+  color: white;
+  order: 2; /* Content comes second in column layout (bottom) */
+}
+
+@media (min-width: 768px) {
+  .skills-content {
+    width: 50%; /* Takes half the width in row layout */
+    padding: 0 2.5rem;
+    order: 1; /* Content comes first (left side) in row layout */
+  }
+}
+
+.skills-content h1 {
+  background: linear-gradient(
+    to right,
+    #4ade80,
+    #3b82f6
+  ); /* green-400 to blue-500 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 2rem; /* Increased margin for more space below title */
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  .skills-content h1 {
+    margin-bottom: 2rem; /* Larger margin for larger screens */
+    font-size: 2.5rem;
+  }
+}
+
+.skill-category {
+  margin-bottom: 2rem; /* Increased margin between categories for "not cozy" feel */
+}
+
+@media (min-width: 768px) {
+  .skill-category {
+    margin-bottom: 2.25rem; /* Further increased margin for larger screens */
+  }
+}
+
+.skill-category h2 {
+  font-size: 1rem; /* Adjusted font size for smaller screens */
+  font-weight: bold;
+  margin-bottom: 0.8rem; /* Increased margin below h2 for more space */
+  color: #22d3ee; /* Original cyan-400 for consistency */
+  border-bottom: 2px solid #22d3ee;
+  padding-bottom: 0.4rem; /* Adjusted padding for smaller screens */
+  text-transform: uppercase; /* Make category titles stand out */
+  letter-spacing: 0.04em; /* Add slight spacing */
+  text-align: center; /* Ensure category titles are centered on small screens */
+}
+
+@media (min-width: 768px) {
+  .skill-category h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem; /* Larger margin for larger screens */
+    padding-bottom: 0.5rem;
+    text-align: left; /* Align category titles to left on larger screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .skill-category h2 {
+    font-size: 1.25rem;
+  }
+}
+
+.skill-icons {
+  display: flex;
+  gap: 0.8rem; /* Increased gap between icons for "not cozy" feel on smaller screens */
+  align-items: flex-start; /* Align icons to start for better visual flow */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  justify-content: center; /* Center items for better mobile display */
+}
+
+@media (min-width: 768px) {
+  .skill-icons {
+    gap: 1.25rem; /* Increased gap for tablets */
+    justify-content: flex-start; /* Align to start for larger screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .skill-icons {
+    gap: 1.5rem; /* Increased gap for laptops for spacious feel */
+  }
+}
+
+.skill-icon-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white; /* Default text color for the skill name */
+  text-decoration: none;
+  width: 5rem; /* Increased fixed width for more space per icon group on mobile */
+  padding: 0.6rem 0.2rem; /* Added more padding */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.skill-icon-group:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle hover background */
+}
+
+.skill-icon-group i {
+  font-size: 1.8rem; /* Increased size for prominence on mobile */
+  transition: transform 0.3s;
+  /* The color is set directly in HTML for specific brand colors */
+}
+
+.skill-icon-group span {
+  font-size: 0.7rem; /* Adjusted font size for better readability on mobile */
+  margin-top: 0.4rem; /* Adjusted margin for better spacing */
+  opacity: 1; /* Always visible now */
+  color: #e0e0e0; /* A soft white for better readability */
+  text-align: center;
+  line-height: 1.1;
+}
+
+.skill-icon-group:hover i {
+  transform: scale(1.1); /* Slightly less aggressive scale on hover */
+}
+
+/* Media queries for skill-icon-group adjustments */
+@media (min-width: 768px) {
+  .skill-icon-group {
+    width: 6rem; /* Adjust width for larger screens */
+    padding: 0.8rem 0.4rem;
+  }
+  .skill-icon-group i {
+    font-size: 2.1rem; /* Larger icon size for tablets */
+  }
+  .skill-icon-group span {
+    font-size: 0.8rem;
+    margin-top: 0.6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .skill-icon-group {
+    width: 7rem; /* Further increased width for laptops for spacious feel */
+    padding: 1rem 0.6rem;
+  }
+  .skill-icon-group i {
+    font-size: 2.5rem; /* Even larger for desktops */
+  }
+  .skill-icon-group span {
+    font-size: 0.9rem;
+    margin-top: 0.6rem;
+  }
+}
+
+/* New Styles for Soft Skills List */
+.soft-skills-list {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin: 0;
+  color: #d1d5db; /* A slightly darker gray than pure white */
+  font-size: 0.85rem; /* Adjust font size for readability */
+  line-height: 1.5; /* Add line spacing for readability */
+  text-align: center; /* Center list items on small screens */
+}
+
+.soft-skills-list li {
+  margin-bottom: 0.4rem; /* Space between list items */
+}
+
+@media (min-width: 768px) {
+  .soft-skills-list {
+    font-size: 0.95rem;
+    text-align: left; /* Align list items to left on larger screens */
+  }
+  .soft-skills-list li {
+    margin-bottom: 0.6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .soft-skills-list {
+    font-size: 1.05rem;
+  }
+}
+
+/* Projects Section */
+.projects-section {
+  padding: 4rem 1rem; /* Adjusted padding for smaller screens */
+  position: relative; /* CRUCIAL: Makes it a positioning context for the absolute blob */
+  overflow: hidden;
+}
+/* Mouse-following Light Blob */
+.mouse-light-blob {
+  position: absolute;
+  width: 30rem; /* Size of the light effect - adjust as needed */
+  height: 30rem; /* Size of the light effect - adjust as needed */
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 204, 0, 0.4),
+    /* Lighter yellow, higher opacity */ rgba(255, 153, 0, 0.2),
+    /* Darker yellow, lower opacity */ transparent 70% /* Fade to transparent */
+  );
+  filter: blur(80px); /* Adjust blur for a soft ambient glow */
+  opacity: 0.5; /* Initial opacity - adjust for brightness */
+  pointer-events: none; /* IMPORTANT: Ensures the light doesn't block clicks on projects */
+  transform: translate(-50%, -50%); /* Centers the blob on the mouse cursor */
+  transition: opacity 0.3s ease-out; /* Smooth transition for opacity changes */
+  z-index: 1; /* Place it behind interactive elements but above section background */
+  /* Hide it initially until JavaScript positions it */
+  top: -1000px;
+  left: -1000px;
+}
+
+/* Optional: Adjust opacity on hover for a subtle effect */
+.projects-section:hover .mouse-light-blob {
+  opacity: 0.8; /* Make it brighter when hovering over the section */
+}
+
+@media (min-width: 768px) {
+  .projects-section {
+    padding: 5rem 1rem;
+  }
+}
+
+.projects-section h1 {
+  background: linear-gradient(
+    to right,
+    #fbbf24,
+    #3b82f6
+  ); /* yellow-400 to blue-500 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1.5rem; /* Adjusted margin for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .projects-section h1 {
+    margin-bottom: 2rem;
+  }
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* More flexible grid for small screens */
+  gap: 1rem; /* Adjusted gap for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .project-grid {
+    gap: 1.5rem;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(300px, 1fr)
+    ); /* Slightly larger min for tablets */
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns for laptops */
+  }
+}
+
+.project-card {
+  position: relative;
+  padding: 1rem; /* Adjusted padding for smaller screens */
+  border-radius: 0.5rem; /* Adjusted border radius for smaller screens */
+  background-color: rgba(0, 0, 0, 0.5); /* black/50 */
+  backdrop-filter: blur(8px); /* backdrop-blur-lg */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* white/10 */
+  transition: all 0.3s ease;
+  min-height: 14rem; /* Adjusted minimum height */
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+  overflow: hidden; /* Ensure gradient doesn't spill */
+}
+
+@media (min-width: 768px) {
+  .project-card {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    min-height: 16rem;
+    color: #fbbf24;
+  }
+}
+
+.project-card:hover {
+  border-color: #fbbf24; /* yellow-400 */
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 215, 0, 0.15); /* gold/15 */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card h3 {
+  font-size: 1rem; /* Adjusted font size for smaller screens */
+  font-weight: bold;
+  color: #fbbf24; /* yellow-400 */
+  margin-bottom: 0.4rem; /* Adjusted margin for smaller screens */
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .project-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.project-card p {
+  font-size: 0.8rem; /* Adjusted font size for smaller screens */
+  color: #d1d5db; /* gray-300 */
+  line-height: 1.3; /* Adjusted line height for smaller screens */
+  flex-grow: 1; /* Allow description to take space */
+}
+
+@media (min-width: 768px) {
+  .project-card p {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+}
+
+.project-card .project-icon {
+  position: absolute;
+  bottom: 0.75rem; /* Adjusted bottom margin for smaller screens */
+  right: 0.75rem; /* Adjusted right margin for smaller screens */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@media (min-width: 768px) {
+  .project-card .project-icon {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+.project-card:hover .project-icon {
+  opacity: 1;
+}
+
+.project-card .project-icon i {
+  font-size: 1rem; /* Adjusted font size for smaller screens */
+  color: #fbbf24; /* yellow-400 */
+}
+
+@media (min-width: 768px) {
+  .project-card .project-icon i {
+    font-size: 1.25rem;
+  }
+  .project-icon {
+    /* background-color: #facc15; Yellow background for icon */
+    color: black;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  /* Mouse-following Light Blob - IMPORTANT */
+  .mouse-light-blob {
+    position: absolute;
+    width: 10rem; /* Adjust size for within the card */
+    height: 10rem; /* Adjust size for within the card */
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 204, 0, 0.6),
+      /* Increased opacity */ rgba(255, 153, 0, 0.4),
+      /* Increased opacity */ transparent 70%
+    );
+    filter: blur(30px); /* Adjust blur for a more contained glow */
+    opacity: 0; /* Hidden by default */
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease-out;
+    z-index: 0; /* Behind the text and icon */
+    top: -100%; /* Initial off-screen position */
+    left: -100%; /* Initial off-screen position */
+  }
+
+  .project-card:hover .mouse-light-blob {
+    opacity: 0.7; /* Make it visible on card hover */
+  }
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 4rem 1rem; /* Adjusted padding for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .contact-section {
+    padding: 5rem 1rem;
+  }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem; /* Adjusted gap for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.contact-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.contact-image-container img {
+  height: 14rem; /* Adjusted height for smaller screens */
+  object-fit: contain;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.contact-image-container img:hover {
+  transform: scale(1.01);
+}
+
+@media (min-width: 768px) {
+  .contact-image-container img {
+    height: 18.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-image-container img {
+    height: 25rem;
+  }
+}
+
+.contact-blob-1,
+.contact-blob-2 {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.contact-blob-1 {
+  width: 25rem; /* Adjusted width for smaller screens */
+  height: 25rem; /* Adjusted height for smaller screens */
+  background: linear-gradient(
+    to bottom right,
+    rgba(153, 27, 27, 0.3),
+    rgba(96, 165, 250, 0.3)
+  ); /* red-900/30 to blue-400/30 */
+  filter: blur(70px); /* Adjusted blur for smaller screens */
+  opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+  .contact-blob-1 {
+    width: 31.25rem;
+    height: 31.25rem;
+    filter: blur(100px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-blob-1 {
+    width: 43.75rem;
+    height: 43.75rem;
+  }
+}
+
+.contact-blob-2 {
+  width: 15rem; /* Adjusted width for smaller screens */
+  height: 15rem; /* Adjusted height for smaller screens */
+  background: linear-gradient(
+    to bottom right,
+    rgba(236, 72, 153, 0.2),
+    rgba(153, 27, 27, 0.2)
+  ); /* pink-500/20 to red-900/20 */
+  filter: blur(60px); /* Adjusted blur for smaller screens */
+  opacity: 0.6;
+  animation: pulse 4s infinite ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .contact-blob-2 {
+    width: 18.75rem;
+    height: 18.75rem;
+    filter: blur(80px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-blob-2 {
+    width: 31.25rem;
+    height: 31.25rem;
+  }
+}
+
+.contact-content {
+  color: white;
+  z-index: 10; /* Ensure this entire content block is above blobs/image */
+  position: relative;
+}
+
+.contact-content h1 {
+  background: linear-gradient(
+    to right,
+    #ef4444,
+    #3b82f6
+  ); /* red-400 to blue-500 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1.5rem; /* Adjusted margin for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .contact-content h1 {
+    margin-bottom: 2rem;
+  }
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem; /* Adjusted font size for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .contact-list {
+    font-size: 1.125rem;
+  }
+}
+
+.contact-list li {
+  margin-bottom: 0.8rem; /* Adjusted margin for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .contact-list li {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Ensure contact links are clickable */
+.contact-list li a {
+  /* These are existing styles, ensure they are present */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  /* Ensure this specific link element is on top of anything that might overlap */
+  position: relative; /* Make z-index effective for the link itself */
+  z-index: 20; /* A higher z-index to ensure it's on top of almost everything else */
+
+  /* Force pointer events for the entire link area (including text content) */
+  pointer-events: auto !important;
+
+  /* Add some padding for a larger, more forgiving click area around the text */
+  padding: 0.4rem 0; /* Add vertical padding around the text and icon */
+
+  /* Ensure text wrapping doesn't create issues */
+  white-space: nowrap; /* Keep text on one line */
+  overflow: visible; /* Ensure content is not clipped by its container */
+  /* text-overflow: ellipsis; */ /* Only if you want ellipses for overflowing text */
+
+  font-size: 1.1rem; /* Base font size for link text */
+  /* ... other existing styles for contact-list li a ... */
+}
+.contact-list li a:hover {
+  color: #b40202; /* Pink color on hover */
+}
+
+/* Remixicon Icon (I) Styles within the link */
+.contact-list li a i.ri-external-link-line {
+  font-size: 1em; /* Make the Remixicon icon size relative to the surrounding text */
+  margin-left: 0.2em; /* Small space between the end of text and the icon */
+  vertical-align: middle; /* Align icon vertically with text */
+  flex-shrink: 0; /* Prevent icon from shrinking if text is long */
+  pointer-events: auto !important; /* Explicitly ensure the icon part is clickable too */
+  /* ... other existing styles for contact-list li a i ... */
+}
+.contact-list li a::first-letter {
+  /* If you have any specific styling for first letter/emoji, check it */
+  pointer-events: auto; /* Just in case */
+}
+
+/* Make sure nothing is inheriting pointer-events: none; to the text */
+.contact-list li a > span {
+  /* If you wrap text in a span */
+  pointer-events: auto;
+}
+
+/* If you are using any ::before or ::after pseudo-elements on the <li> or <a>, check their properties */
+.contact-list li::before,
+.contact-list li::after,
+.contact-list li a::before,
+.contact-list li a::after {
+  pointer-events: none; /* Make pseudo-elements not interfere with clicks */
+}
+/* Adjust icon size for Remixicon if needed */
+.contact-list li a i {
+  font-size: 1em; /* Make the icon size relative to the text */
+  margin-left: 0.2em; /* Small space between text and icon */
+  vertical-align: middle; /* Align icon vertically with text */
+}
+
+@media (min-width: 768px) {
+  .contact-list li a {
+    gap: 0.5rem;
+  }
+  .contact-list li a i {
+    font-size: 1.1em; /* Slightly larger icon on wider screens */
+  }
+}
+
+/* Footer */
+.footer {
+  background-color: black;
+  color: white;
+  text-align: right;
+  padding: 1rem; /* Adjusted padding for smaller screens */
+  font-size: 0.8rem; /* Adjusted font size for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 1.25rem;
+    font-size: inherit; /* Reset to default inherited font size if needed */
+  }
+}
+
+/* Keyframe Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
